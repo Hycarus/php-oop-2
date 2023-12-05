@@ -28,6 +28,15 @@ class Game extends Product
         $playtime = $this->playtime;
         include __DIR__ . '/../Views/card.php';
     }
+    public static function getRndImage()
+    {
+        $gameString = file_get_contents(__DIR__ . '/steam_db.json');
+        $gameList = json_decode($gameString, true);
+        $rndIndex = rand(0, count($gameList) - 1);
+        $gameList[$rndIndex];
+        $image = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' . $gameList[$rndIndex]['appid'] . '/header.jpg';
+        return $image;
+    }
     public static function fetchAll()
     {
         $gameString = file_get_contents(__DIR__ . '/steam_db.json');

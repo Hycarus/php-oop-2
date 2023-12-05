@@ -63,7 +63,6 @@ class Movie extends Product
         $quantity = $this->quantity;
         include __DIR__ . '/../Views/card.php';
     }
-
     public static function fetchAll()
     {
         $movieString = file_get_contents(__DIR__ . '/movie_db.json');
