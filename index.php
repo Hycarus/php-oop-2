@@ -1,17 +1,13 @@
 <?php
 include __DIR__ . '/Views/header.php';
-include __DIR__ . '/Model/Movie.php';
+if (!isset($_SESSION['auth_token'])) {
+    header('Location: login.php');
+    exit;
+}
 ?>
 
 <section class="container">
-    <h2>Movies</h2>
-    <div class="row">
-        <?php
-        foreach ($movies as $movie) {
-            $movie->printCard();
-        }
-        ?>
-    </div>
+    <h2>Home</h2>
 </section>
 
 <?php
