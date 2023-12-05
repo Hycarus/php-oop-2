@@ -1,13 +1,21 @@
 <div class="col-12 col-md-4 col-lg-3">
-    <div class="card my-3 ">
+    <div class="card my-3 d-inline-block">
         <img src="<?= $image ?>" class="card-img-top my-img-card-top" alt="<?= $title ?>">
         <div class="card-body overflow-y-auto my-card-body">
-            <h5 class="card-title">
-                <?= $title ?>
-            </h5>
-            <p class="card-text my-card-content">
-                <?= $content = substr($content, 0, 150) . '...' ?>
-            </p>
+            <?php if (isset($title)) { ?>
+                <h5 class="card-title">
+                    <?= $title ?>
+                </h5>
+            <?php } elseif (isset($name)) { ?>
+                <h5 class="card-title">
+                    <?= $name ?>
+                </h5>
+            <?php } ?>
+            <?php if (isset($content)) { ?>
+                <p class="card-text my-card-content">
+                    <?= $content = substr($content, 0, 150) . '...' ?>
+                </p>
+            <?php } ?>
             <?php if (isset($authors)) { ?>
                 <div class="my-3">
                     Autori:
@@ -16,6 +24,12 @@
                             <?= $item ?>
                         </div>
                     <?php } ?>
+                </div>
+            <?php } ?>
+            <?php if (isset($playtime)) { ?>
+                <div class="my-3">
+                    Ore giocate:
+                    <?= $playtime ?>
                 </div>
             <?php } ?>
             <?php if (isset($categories)) { ?>
@@ -51,7 +65,7 @@
             <div>
                 Disponibilità: <?= $quantity ?> Prezzo: <?= $price ?> €
                 <?php
-                if ($quantity > 0) { ?> <a href="#" class="btn btn-primary">Acquista</a> <?php } ?>
+                if ($quantity > 0) { ?> <a href="#" class="btn btn-primary my-3">Acquista</a> <?php } ?>
                 <?php if ($sconto > 0) { ?> <span class="badge bg-danger">Sconto del <?= $sconto ?>%</span> <?php } ?>
             </div>
         </div>
