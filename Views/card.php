@@ -6,22 +6,48 @@
                 <?= $title ?>
             </h5>
             <p class="card-text my-card-content">
-                <?= $content ?>
+                <?= $content = substr($content, 0, 150) . '...' ?>
             </p>
-            <div class="d-flex justify-content-between align-items-flex-start">
-                <?= $custom ?>
-            </div>
-            <div>
-                Generi:
-                <?php foreach ($genre as $item) { ?>
-                    <div>
-                        <?= $item->name ?>
-                    </div>
-                <?php } ?>
-            </div>
-            <div class="my-flag my-2">
-                <img class="w-100" src="<?= $flag ?>" alt="">
-            </div>
+            <?php if (isset($authors)) { ?>
+                <div class="my-3">
+                    Autori:
+                    <?php foreach ($authors as $item) { ?>
+                        <div>
+                            <?= $item ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <?php if (isset($categories)) { ?>
+                <div class="my-3">
+                    Categorie:
+                    <?php foreach ($categories as $item) { ?>
+                        <div>
+                            <?= $item ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <?php if (isset($custom)) { ?>
+                <div class="d-flex justify-content-between align-items-flex-start">
+                    <?php echo $custom ?>
+                </div>
+            <?php } ?>
+            <?php if (isset($genre)) { ?>
+                <div>
+                    Generi:
+                    <?php foreach ($genre as $item) { ?>
+                        <div>
+                            <?= $item->name ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <?php if (isset($flag)) { ?>
+                <div class="my-flag my-2">
+                    <img class="w-100" src="<?= $flag ?>" alt="">
+                </div>
+            <?php } ?>
             <div>
                 Disponibilità: <?= $quantity ?> Prezzo: <?= $price ?> €
                 <?php
