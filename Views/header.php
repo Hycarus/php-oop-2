@@ -18,15 +18,22 @@ session_start();
     <!-- link to Font-Family and CSS Files -->
     <link rel="stylesheet" href="css/style.css" />
     <!-- Document Title -->
-    <title>Document</title>
+    <title>OOP</title>
 </head>
 
 <body>
-    <header class="container">
-        <h1>OOP - Shop</h1>
+    <header class="container my-2">
+        <div class="d-flex justify-content-center align-items-center my-2">
+            <h1 class="w-25 mx-5">OOP - Shop</h1>
+            <div class="w-25 mx-5">
+                <img class="w-25" src="img/logo.png" alt="OOP - Shop">
+            </div>
+        </div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">OOP - Shop</a>
+                <a class="navbar-brand w-25" href="#">
+                    <img class="w-25" src="img/logo.png" alt="OOP - Shop">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
