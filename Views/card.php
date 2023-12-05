@@ -19,8 +19,14 @@
                     </div>
                 <?php } ?>
             </div>
-            <div class="my-flag">
+            <div class="my-flag my-2">
                 <img class="w-100" src="<?= $flag ?>" alt="">
+            </div>
+            <div>
+                Disponibilità: <?= $quantity ?> Prezzo: <?= $price ?> €
+                <?php
+                if ($quantity > 0) { ?> <a href="#" class="btn btn-primary">Acquista</a> <?php } ?>
+                <?php if ($sconto > 0) { ?> <span class="badge bg-danger">Sconto del <?= $sconto ?>%</span> <?php } ?>
             </div>
         </div>
     </div>
