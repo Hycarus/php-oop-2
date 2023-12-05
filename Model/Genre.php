@@ -8,12 +8,19 @@ class Genre
     {
         $this->name = $name;
     }
+    public static function fetchAll()
+    {
+        $genresString = file_get_contents(__DIR__ . "/../Model/genre_db.json");
+        $genresArray = json_decode($genresString, true);
+
+        $genres = [];
+
+        foreach ($genresArray as $item) {
+            $genres[] = new Genre($item);
+        }
+        return $genres;
+    }
 }
-$genresString = file_get_contents(__DIR__ . "/../Model/genre_db.json");
-$genresArray = json_decode($genresString, true);
-$genres = [];
-foreach ($genresArray as $item) {
-    $genres[] = new Genre($item);
-}
+
 // $action = new Genre('Action');
 // $comedy = new Genre('Comedy');
