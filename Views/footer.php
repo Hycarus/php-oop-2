@@ -1,5 +1,5 @@
 </main>
-<footer>
+<footer class="container my-5">
     footer
 </footer>
 
