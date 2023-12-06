@@ -1,9 +1,11 @@
 <?php
 include __DIR__ . '/Product.php';
+include __DIR__ . '/../Traits/DrawCard.php';
 
 
 class Game extends Product
 {
+    use DrawCard;
     private int $appid;
     private string $name;
     private string $image;
@@ -18,15 +20,17 @@ class Game extends Product
         $this->image = $image;
         $this->playtime = $playtime;
     }
-    public function printCard()
+    public function formatCard()
     {
-        $sconto = $this->setDiscount($this->name);
-        $image = $this->image;
-        $title = $this->name;
-        $price = $this->price;
-        $quantity = $this->quantity;
-        $playtime = $this->playtime;
-        include __DIR__ . '/../Views/card.php';
+        $cardItem = [
+            'title' => $this->name,
+            'image' => $this->image,
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'sconto' => $this->setDiscount($this->name),
+            'playtime' => $this->playtime
+        ];
+        return $cardItem;
     }
     public static function getRndImage()
     {

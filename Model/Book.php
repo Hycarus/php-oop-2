@@ -1,8 +1,10 @@
 <?php
 include __DIR__ . '/Product.php';
+include __DIR__ . '/../Traits/DrawCard.php';
 
 class Book extends Product
 {
+    use DrawCard;
     private int $_id;
     private string $title;
     private string $longDescription;
@@ -13,6 +15,7 @@ class Book extends Product
 
     function __construct($id, $title, $overview, $image, $authors, $quantity, $price, $categories)
     {
+
         parent::__construct($price, $quantity);
         $this->categories = $categories;
         $this->_id = $id;
@@ -21,17 +24,19 @@ class Book extends Product
         $this->thumbnailUrl = $image;
         $this->authors = $authors;
     }
-    public function printCard()
+    public function formatCard()
     {
-        $sconto = $this->setDiscount($this->title);
-        $image = $this->thumbnailUrl;
-        $title = $this->title;
-        $content = $this->longDescription;
-        $price = $this->price;
-        $quantity = $this->quantity;
-        $authors = $this->authors;
-        $categories = $this->categories;
-        include __DIR__ . '/../Views/card.php';
+        $cardItem = [
+            'title' => $this->title,
+            'content' => $this->longDescription,
+            'image' => $this->thumbnailUrl,
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'sconto' => $this->setDiscount($this->title),
+            'authors' => $this->authors,
+            'categories' => $this->categories,
+        ];
+        return $cardItem;
     }
     public static function fetchAll()
     {

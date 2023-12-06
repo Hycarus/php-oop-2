@@ -1,8 +1,10 @@
 <?php
 include __DIR__ . '/Genre.php';
 include __DIR__ . '/Product.php';
+include __DIR__ . '/../Traits/DrawCard.php';
 class Movie extends Product
 {
+    use DrawCard;
     private int $id;
     private string $title;
     private string $overview;
@@ -50,18 +52,20 @@ class Movie extends Product
         return $flag;
     }
 
-    public function printCard()
+    public function formatCard()
     {
-        $sconto = $this->setDiscount($this->title);
-        $image = $this->poster_path;
-        $title = $this->title;
-        $content = $this->overview;
-        $custom = $this->getVote();
-        $genre = $this->genre;
-        $flag = $this->getFlag();
-        $price = $this->price;
-        $quantity = $this->quantity;
-        include __DIR__ . '/../Views/card.php';
+        $cardItem = [
+            'title' => $this->title,
+            'content' => $this->overview,
+            'custom' => $this->getVote(),
+            'image' => $this->poster_path,
+            'genre' => $this->genre,
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'flag' => $this->getFlag(),
+            'sconto' => $this->setDiscount($this->title)
+        ];
+        return $cardItem;
     }
     public static function fetchAll()
     {
