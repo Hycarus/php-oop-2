@@ -56,7 +56,7 @@ class Movie extends Product
     {
         if (ceil($this->vote_average) < 7) {
             try {
-                $this->setDiscount(1);
+                $this->setDiscount(rand(0, 100));
             } catch (Exception $e) {
                 $error = 'Exception: ' . $e->getMessage();
             }
@@ -71,7 +71,7 @@ class Movie extends Product
             'price' => $this->price,
             'quantity' => $this->quantity,
             'flag' => $this->getFlag(),
-            'sconto' => $this->setDiscount(10)
+            'sconto' => $this->getDiscount(rand(0, 100)),
         ];
         return $cardItem;
     }
