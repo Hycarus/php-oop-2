@@ -13,10 +13,10 @@ class Book extends Product
     private array $categories;
 
 
-    function __construct($id, $title, $overview, $image, $authors, $quantity, $price, $categories)
+    function __construct($id, $title, $overview, $image, $authors, $quantity, $price, $categories, $discount)
     {
 
-        parent::__construct($price, $quantity);
+        parent::__construct($price, $quantity, $discount);
         $this->categories = $categories;
         $this->_id = $id;
         $this->title = $title;
@@ -32,7 +32,7 @@ class Book extends Product
             'image' => $this->thumbnailUrl,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'sconto' => $this->setDiscount($this->title),
+            'sconto' => $this->setDiscount(10),
             'authors' => $this->authors,
             'categories' => $this->categories,
         ];
@@ -55,9 +55,10 @@ class Book extends Product
             for ($i = 0; $i < count($item['categories']); $i++) {
                 array_push($categoriesList, $item['categories'][$i]);
             }
+            $discount = rand(0, 100);
             $quantity = rand(0, 100);
             $price = rand(5, 200);
-            $books[] = new Book($item['_id'], $item['title'], $item['longDescription'], $item['thumbnailUrl'], $item['authors'], $quantity, $price, $item['categories']);
+            $books[] = new Book($item['_id'], $item['title'], $item['longDescription'], $item['thumbnailUrl'], $item['authors'], $quantity, $price, $item['categories'], $discount);
         }
         return $books;
     }

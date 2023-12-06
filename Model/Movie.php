@@ -14,9 +14,9 @@ class Movie extends Product
     private array $genre;
 
 
-    function __construct($id, $title, $overview, $vote, $image, $language, $genre, $quantity, $price)
+    function __construct($id, $title, $overview, $vote, $image, $language, $genre, $quantity, $price, $discount)
     {
-        parent::__construct($price, $quantity);
+        parent::__construct($price, $quantity, $discount);
         $this->id = $id;
         $this->title = $title;
         $this->overview = $overview;
@@ -54,7 +54,15 @@ class Movie extends Product
 
     public function formatCard()
     {
+        if (ceil($this->vote_average) < 7) {
+            try {
+                $this->setDiscount(1);
+            } catch (Exception $e) {
+                $error = 'Exception: ' . $e->getMessage();
+            }
+        }
         $cardItem = [
+            'error' => $error ?? '',
             'title' => $this->title,
             'content' => $this->overview,
             'custom' => $this->getVote(),
@@ -63,7 +71,7 @@ class Movie extends Product
             'price' => $this->price,
             'quantity' => $this->quantity,
             'flag' => $this->getFlag(),
-            'sconto' => $this->setDiscount($this->title)
+            'sconto' => $this->setDiscount(10)
         ];
         return $cardItem;
     }
@@ -83,9 +91,10 @@ class Movie extends Product
                 $randGenre = $genres[$index];
                 array_push($randomGenres, $randGenre);
             }
+            $discount = rand(0, 100);
             $quantity = rand(0, 100);
             $price = rand(5, 200);
-            $movies[] = new Movie($item['id'], $item['title'], $item['overview'], $item['vote_average'], $item['poster_path'], $item['original_language'], $randomGenres, $quantity, $price);
+            $movies[] = new Movie($item['id'], $item['title'], $item['overview'], $item['vote_average'], $item['poster_path'], $item['original_language'], $randomGenres, $quantity, $price, $discount);
         }
         return $movies;
     }

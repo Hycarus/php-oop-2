@@ -12,9 +12,9 @@ class Game extends Product
     private string $playtime;
 
 
-    function __construct($id, $title, $image, $quantity, $price, $playtime)
+    function __construct($id, $title, $image, $quantity, $price, $playtime, $discount)
     {
-        parent::__construct($price, $quantity);
+        parent::__construct($price, $quantity, $discount);
         $this->appid = $id;
         $this->name = $title;
         $this->image = $image;
@@ -27,7 +27,7 @@ class Game extends Product
             'image' => $this->image,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'sconto' => $this->setDiscount($this->name),
+            'sconto' => $this->setDiscount(10),
             'playtime' => $this->playtime
         ];
         return $cardItem;
@@ -51,9 +51,10 @@ class Game extends Product
 
         foreach ($gameList as $item) {
             $image = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' . $item['appid'] . '/header.jpg';
+            $discount = rand(0, 100);
             $quantity = rand(0, 100);
             $price = rand(5, 200);
-            $games[] = new Game($item['appid'], $item['name'], $image, $quantity, $price, $item['playtime_forever']);
+            $games[] = new Game($item['appid'], $item['name'], $image, $quantity, $price, $item['playtime_forever'], $discount);
         }
         return $games;
     }

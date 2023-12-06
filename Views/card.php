@@ -2,6 +2,12 @@
     <div class="card my-3 d-inline-block">
         <img src="<?= $image ?>" class="card-img-top my-img-card-top" alt="<?= $title ?>">
         <div class="card-body overflow-y-auto my-card-body">
+            <?php
+            if (isset($error) && $error) { ?>
+                <div class="alert alert-danger">
+                    <?= $error ?>
+                </div>
+            <?php } ?>
             <?php if (isset($title)) { ?>
                 <h5 class="card-title">
                     <?= $title ?>

@@ -2,20 +2,25 @@
 class Product
 {
     protected float $price;
-    private int $discount = 0;
+    private int $discount;
     protected int $quantity;
 
-    public function __construct($price, $quantity)
+    public function __construct($price, $quantity, $discount)
     {
         $this->price = $price;
         $this->quantity = $quantity;
+        $this->discount = $discount;
     }
-    public function setDiscount($genre)
+    public function setDiscount(int $perc)
     {
-        if ($genre == 'Horror') {
-            return $this->discount = 20;
+        if ($perc < 5 || $perc > 90) {
+            throw new Exception("Discount must be between 5 and 90");
         } else {
-            return $this->discount;
+            $this->discount = $perc;
         }
+    }
+    public function getDiscount()
+    {
+        return $this->discount;
     }
 }
